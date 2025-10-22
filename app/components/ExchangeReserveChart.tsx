@@ -9,7 +9,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  TooltipProps,
 } from "recharts";
+import {
+  NameType,
+  ValueType,
+} from "recharts/types/component/DefaultTooltipContent";
 
 interface ChartData {
   date: string;
@@ -40,6 +45,12 @@ export default function ExchangeReserveChart({
   const sortedData = [...data].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
+
+  const customTooltipFormatter = (value: ValueType, name: NameType) => {
+    if (typeof value !== "number") return ["N/A", name];
+    if (name === "가격") return [`$${formatNumber(value)}`, name];
+    return [formatNumber(value), name];
+  };
 
   return (
     <ResponsiveContainer width="100%" height="100%">
@@ -77,7 +88,7 @@ export default function ExchangeReserveChart({
         <YAxis
           yAxisId="right"
           orientation="right"
-          stroke="#E8B862" // 가격 축 색상 변경
+          stroke="#E8B862"
           tick={{ fill: "#666" }}
           domain={["auto", "auto"]}
           tickFormatter={(value) => `$${formatNumber(value)}`}
@@ -97,10 +108,7 @@ export default function ExchangeReserveChart({
           }}
           labelStyle={{ color: "#fff" }}
           itemStyle={{ color: "#fff" }}
-          formatter={(value: number | null, name: string) => {
-            if (name === "가격") return [`$${formatNumber(value)}`, name];
-            return [formatNumber(value), name];
-          }}
+          formatter={customTooltipFormatter}
           labelFormatter={formatDate}
         />
         <Legend />
@@ -117,7 +125,7 @@ export default function ExchangeReserveChart({
           yAxisId="right"
           type="monotone"
           dataKey="price"
-          stroke="#E8B862" // 가격 선 색상을 황금색으로 변경
+          stroke="#E8B862"
           name="가격"
           dot={false}
           strokeWidth={2}
