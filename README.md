@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 비트코인 거래소 보유량 분석
 
-## Getting Started
+실시간 거래소 보유량과 가격 데이터를 분석하는 대시보드입니다.
 
-First, run the development server:
+## 기능
+
+- 거래소별 비트코인 보유량 조회
+- 기간별 데이터 필터링 (1개월, 3개월, 6개월)
+- 실시간 가격 데이터 연동
+- 반응형 차트 UI
+
+## 기술 스택
+
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Recharts
+
+## 시작하기
 
 ```bash
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# 빌드
+npm run build
+
+# 프로덕션 서버 실행
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 환경 변수
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`.env.local` 파일을 생성하고 다음 변수를 설정하세요:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+CRYPTOQUANT_API_KEY=your_api_key_here
+```
 
-## Learn More
+## API
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- CryptoQuant API를 사용하여 거래소 보유량 데이터를 가져옵니다.
+- 실시간 가격 데이터도 함께 표시됩니다.
